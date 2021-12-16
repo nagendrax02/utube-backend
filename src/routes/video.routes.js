@@ -25,4 +25,14 @@ router.get("/api/video", async(req,res)=>{
     }
 })
 
+router.get("/api/video/:id", async(req,res)=>{
+    try{
+        const video = await videoModel.findOne({_id:req.params.id}).lean().exec();
+    
+        return res.status(200).json({success:true, video, length: videos.length})
+    }catch(err){
+        return res.status(201).json({success:false, error:err.message});
+    }
+})
+
 module.exports = router;

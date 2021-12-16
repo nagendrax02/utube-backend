@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 2000;
 //=============================================Server Endpoints================================
  app.use(AuthRoutes);
  app.use(VideoRoutes)
-
+//===================================================================================
 
 app.listen(PORT, async()=>{
     await dbConnection();
