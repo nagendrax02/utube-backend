@@ -11,7 +11,6 @@ router.post("/api/signup", (req,res)=>{
 router.post("/api/signin", (req,res)=>{
     Controller.signin(req,res);
 })
-
 router.post("/api/password-reset", (req,res)=>{
     Controller.forgotPassword(req,res);
 })

@@ -38,10 +38,10 @@ class AuthController{
             if(error){
                 return res.status(500).json({msg:"Network error failed to log in"});
             }
-            const {account ,password} = fields;
-            const isAccountEmail = account.includes('@');
+            const {email ,password} = fields;
+            const isAccountEmail = email.includes('@');
             if(isAccountEmail){
-                const user = await userModel.findOne({email:account});
+                const user = await userModel.findOne({email:email});
                 if(!user){
                     return res.status(404).json({msg:"account with this email does not exist"});
                 }
@@ -55,10 +55,10 @@ class AuthController{
                     username:user.username
                 }
                 const token = jsonWebToken.sign(tokenPayload,process.env.COOKIE_KEY, {expiresIn:'365d'} )
-                return res.status(200).json({token})
+                return res.status(200).json({token,tokenPayload})
             } 
 
-            const user = await userModel.findOne({username:account});
+            const user = await userModel.findOne({username:email});
             if(!user){
                 return res.status(404).json({msg:"account with this username does not exist"});
             }
